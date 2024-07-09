@@ -45,19 +45,25 @@ loadTodo();
 </script>
 
 <template>
-  <ul>
-    <div>
-      <input type="text" v-model="todoText" />
-      <button @click="addTodo()">Add</button>
-    </div>
-    <li v-for="todo in todos">
+  <ul style="display: flex; flex-direction: column; align-items: center">
+    <v-col
+      cols="12"
+      md="6"
+      lg="3"
+      style="display: flex; justify-content: center"
+    >
+      <v-text-field label="Todo" v-model="todoText"></v-text-field>
+      <v-btn @click="addTodo()" style="height: 55px">Add</v-btn>
+    </v-col>
+    <li v-for="todo in todos" style="display: flex; align-items: center; gap: 1rem;">
       {{ todo.id }}
       {{ todo.name }}
-      <select v-model="todo.status">
-        <option>Pending</option>
-        <option>Doing</option>
-        <option>Done</option>
-      </select>
+      <v-select
+        v-model="todo.status"
+        label="Select"
+        :items="['Pending', 'Doing', 'Done']"
+        style="width: 300px;"
+      />
       <v-btn @click="editTodo(todo.id, todo)">Update</v-btn>
     </li>
   </ul>
